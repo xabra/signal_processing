@@ -1,13 +1,17 @@
-use crate::CircularVector;
-
 pub struct FIRFilter {
     weights: Vec<f64>,
-    delay_line: CircularVector,
+    delay_line: crate::circular_vector::CircularVector<f64>,
 }
+
+// TODO:
+//  Use generics
+//  Initialization
+//  Flush, Clear
+//  Docs
 
 impl FIRFilter {
     pub fn new(size: usize, w: Vec<f64>) -> Result<Self, String> {
-        let delay_line = CircularVector::new(size)?;
+        let delay_line = crate::circular_vector::CircularVector::new(size, 0.0)?;
         if w.len() != size {
             return Err("Size of weights vector must match filter size".to_string());
         } else {
@@ -28,7 +32,7 @@ impl FIRFilter {
         accumulator
     }
     pub fn get_size(&self) -> usize {
-        self.delay_line.size
+        self.delay_line.len()
     }
 }
 
@@ -40,7 +44,7 @@ mod tests {
     fn fir_filter_constructor() {
         let n = 10;
         let filter = FIRFilter::new(n, vec![1.; n]).unwrap();
-        assert_eq!(filter.delay_line.size, n);
+        assert_eq!(filter.delay_line.len(), n);
         assert_eq!(filter.weights.len(), n);
     }
     #[test]

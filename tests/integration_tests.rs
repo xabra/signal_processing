@@ -1,8 +1,9 @@
-use (crate)::FIRFilter;
-use signal_processing::CircularVector;
+use signal_processing::circular_vector::CircularVector;
+use signal_processing::fir_filter::FIRFilter;
+
 #[test]
 fn delay_line_test() {
-    let mut cv = CircularVector::new(25).unwrap();
+    let mut cv = CircularVector::new(25, 0.0).unwrap();
     let n = 32;
     let mut pop;
     cv.print();
