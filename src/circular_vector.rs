@@ -71,7 +71,7 @@ mod tests {
     #[test]
     fn circular_vector_constructor() {
         let n = 5;
-        let cv = CircularVector::<f64>::new(n, 0.0).unwrap();
+        let cv: CircularVector<f64> = CircularVector::new(n, 0.0).unwrap();
         assert_eq!(cv.len(), n); // Size is correct
         assert_eq!(cv.data.len(), n); // Internal datavector has same length
         assert_eq!(cv.tail, n - 1); // Tail pointer points to last element
@@ -86,7 +86,7 @@ mod tests {
     #[test]
     fn circular_index_push_and_get() {
         let n = 5;
-        let mut cv = CircularVector::new(n, 0.0).unwrap();
+        let mut cv: CircularVector<f64> = CircularVector::new(n, 0.0).unwrap();
         assert_eq!(cv.get(2), 0.); // Test typical element is initialized to 0.0
         let mut pop = 0.0;
         for i in 1..7 {
