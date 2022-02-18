@@ -65,4 +65,20 @@ mod tests {
         let n = 10;
         assert_eq!(FIRFilter::new(n, vec![1.; 10]).unwrap().get_size(), n);
     }
+    #[test]
+    fn filter_test() {
+        let size = 5;
+        let n_samples = 10;
+        let weights = vec![1.0 / (size as f64); size]; // Equal weights, normalized to 1.0
+        let mut f = FIRFilter::new(size, weights).unwrap();
+        let mut output = 0.0;
+        let input = 1.0;
+        println!();
+        for _i in 0..n_samples {
+            output = f.filter(input);
+            println!("{:.2} -> {:.2}", input, output);
+        }
+
+        assert_eq!(output, 1.) // Filter's last output should be 1.0
+    }
 }

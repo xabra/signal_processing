@@ -91,8 +91,11 @@ mod tests {
         let mut pop = 0.0;
         for i in 1..7 {
             pop = cv.push(i as f64);
+            print!("{} <- ", pop);
+            cv.print();
+            print!("\n");
         }
-        assert_eq!(pop, 1.0); // Popped correct value
-        assert_eq!(cv.get(2), 4.) // Third item is 4.0
+        assert_eq!(pop, 1.0); // Test popped correct value
+        assert_eq!(cv.get(2), 4.) // Test third item is 4.0
     }
 }
